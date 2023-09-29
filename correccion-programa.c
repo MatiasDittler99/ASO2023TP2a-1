@@ -20,15 +20,17 @@ void *comer_hamburguesa(void *tid) {
             // Región crítica: Comer una hamburguesa
             printf("Hola! soy el hilo(comensal) %d, me voy a comer una hamburguesa! Quedan %d hamburguesas\n", mi_turno, cantidad_restante_hamburguesas);
             cantidad_restante_hamburguesas--;
+
+            // Cambiar el turno
+            turno = 1 - turno;
         } else {
             printf("SE TERMINARON LAS HAMBURGUESAS :( \n");
+            // Cambiar el turno
+            turno = 1 - turno;
             pthread_exit(NULL);
         }
 
-        // Cambiar el turno
-        turno = 1 - turno;
-
-        // Región no crítica: Permitir que el otro hilo avance
+        // Región no crítica: Permtir que el otro hilo avance
         // Aquí podrías agregar algún tipo de espera para simular el cambio de turno
     }
 }
